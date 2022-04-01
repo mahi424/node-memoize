@@ -1,7 +1,7 @@
 {
   "name": "node-memoize",
-  "version": "1.0.1",
-  "description": "Memoize functions",
+  "version": "1.0.2",
+  "description": "Speed up the apps by memoize'ing both sync and async functions using map or redis. ",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "scripts": {
@@ -50,7 +50,8 @@
     "typescript": "~4.5.3"
   },
   "dependencies": {
-    "debug": "^4.3.3"
+    "debug": "^4.3.3",
+    "tslib": "^2.3.1"
   },
   "volta": {
     "node": "16.13.0"
