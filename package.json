@@ -1,6 +1,6 @@
 {
   "name": "node-memoize",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Speed up the apps by memoize'ing both sync and async functions using map or redis. ",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",

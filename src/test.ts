@@ -4,7 +4,7 @@ import IoRedis from 'ioredis';
 
 import memoize from './memoize';
 // import { memoized } from './method-decorator';
-import { memoized } from '../build/src/method-decorator';
+import { memoized } from './method-decorator';
 
 import { Cache } from './Cache';
 
