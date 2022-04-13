@@ -1,12 +1,13 @@
+import { _function } from './interfaces';
+
 export class Cache {
-  set: Function;
-  has: Function;
-  get: Function;
-  constructor(setFn: Function, hasFn: Function, getFn: Function) {
+  set: _function;
+  has: _function;
+  get: _function;
+  constructor(setFn: _function, hasFn: _function, getFn: _function) {
     this.set = setFn;
     this.has = hasFn;
     this.get = getFn;
   }
 }
-
-export interface ICache extends Cache {}
+export type ICache = Cache

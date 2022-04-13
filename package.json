@@ -1,6 +1,6 @@
 {
   "name": "node-memoize",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Speed up the apps by memoize'ing both sync and async functions using map or redis. ",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -12,7 +12,7 @@
     "prepublish": "npm run build",
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "eslint . --ext .ts,.tsx --ignore-pattern 'build/**/*.d.ts'",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint ./src --fix",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
@@ -43,7 +43,9 @@
     "eslint": "~8.4.1",
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-jest": "~25.3.0",
+    "ioredis": "^5.0.4",
     "jest": "~27.4.4",
+    "object-hash": "^3.0.0",
     "prettier": "~2.5.1",
     "rimraf": "~3.0.2",
     "ts-jest": "~27.1.1",

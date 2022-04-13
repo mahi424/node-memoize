@@ -1,11 +1,12 @@
 import * as Debug from 'debug';
 import { ICache } from './Cache';
+import { _function } from './interfaces';
 
 const debug = Debug('node-memoize');
 
 function memoize(
   func,
-  resolver: Function | null = null,
+  resolver: _function | null = null,
   Cache: ICache | null = null,
 ) {
   if (
@@ -33,7 +34,8 @@ function memoize(
       return await cache.get(key);
     }
     const result = await func.apply(this, args);
-    memoized.cache = (await cache.set(key, result)) || cache;
+    await cache.set(key, result)
+    memoized.cache = cache;
     return result;
   };
   memoized.cache = Cache ? Cache : new Map();

@@ -150,3 +150,38 @@ async function test3() {
 test3();
 
 ```
+
+We now also have support for a decorator that support caching of class methods.
+```js
+
+async function test4() {
+  const redis: any = await getRedis('127.0.0.1', 6379);
+  const cache = new Cache(
+    redis.set.bind(redis),
+    redis.get.bind(redis),
+    redis.get.bind(redis),
+  );
+
+  const config = [hash.MD5, cache];
+//   config can also be empty array. this will then use defaults
+  class MyClass {
+    @memoized(...config)
+    async read(path) {
+      return readFileSync(path);
+    }
+
+    @memoized(...config)
+    get value() {
+      return Math.random();
+    }
+  }
+
+  const a = new MyClass();
+  const b = new MyClass();
+
+  const path = 'temp.txt';
+  console.log(await a.read(path), await b.read(path));
+  console.log(await a.value, await b.value);
+}
+test4();
+```

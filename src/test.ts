@@ -3,7 +3,11 @@ import * as hash from 'object-hash';
 import IoRedis from 'ioredis';
 
 import memoize from './memoize';
+// import { memoized } from './method-decorator';
+import { memoized } from '../build/src/method-decorator';
+
 import { Cache } from './Cache';
+
 async function read(file) {
   return await readFileSync(file).toString();
 }
@@ -97,3 +101,34 @@ async function test3() {
   }
 }
 test3();
+
+async function test4() {
+  const redis: any = await getRedis('127.0.0.1', 6379);
+  const cache = new Cache(
+    redis.set.bind(redis),
+    redis.get.bind(redis),
+    redis.get.bind(redis),
+  );
+
+  const config = [hash.MD5, cache];
+  class MyClass {
+    @memoized(...config)
+    async read(path) {
+      return readFileSync(path);
+    }
+
+    @memoized(...config)
+    get value() {
+      return Math.random();
+    }
+  }
+
+  const a = new MyClass();
+  const b = new MyClass();
+
+  const path = '/home/unmad/Projects/packages/tests/temp.txt';
+  console.log(await a.read(path), await b.read(path));
+  console.log(await a.value, await b.value);
+}
+
+test4();
